@@ -1,39 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-
-import 'dart:convert';
-
-ChatModel chatModelFromJson(String str) => ChatModel.fromJson(json.decode(str));
-
-String chatModelToJson(ChatModel data) => json.encode(data.toJson());
-
-class ChatModel {
-  ChatModel({
-    this.id,
-    this.username,
-    this.sentAt,
-    this.message,
-  });
-
-  String id;
-  String username;
-  String sentAt;
-  String message;
-
-  factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
-        id: json["id"],
-        username: json["username"],
-        sentAt: json["sentAt"],
-        message: json["message"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "username": username,
-        "sentAt": sentAt,
-        "message": message,
-      };
-}
+import 'package:socket_io_chat_client/models/chat_model.dart';
 
 class ChatScreen extends StatefulWidget {
   final String username;
@@ -142,41 +109,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
               ),
-
-              // Padding(
-              //   padding: _newMessages.length != 0
-              //       ? model.user.id == _newMessages.last.senderId
-              //           ? const EdgeInsets.only(right: 30, bottom: 3)
-              //           : const EdgeInsets.only(left: 30, bottom: 3)
-              //       : const EdgeInsets.all(0),
-              //   child: Visibility(
-              //     visible: _showVisibleWidget,
-              //     child: Row(
-              //       mainAxisAlignment: _newMessages.length != 0
-              //           ? model.user.id == _newMessages.last.senderId
-              //               ? MainAxisAlignment.end
-              //               : MainAxisAlignment.start
-              //           : MainAxisAlignment.center,
-              //       children: [
-              //         _showSpinner
-              //             ? model.user.id != widget.offer.creator.id
-              //                 ? Image.asset('assets/images/msgLoadingMe.gif',
-              //                     width: 30, height: 30)
-              //                 : Image.asset('assets/images/msgLoadingYou.gif',
-              //                     width: 30, height: 30)
-              //             : const SizedBox(),
-              //         _showErrorIcon
-              //             ? const Text("Couldn't send message. Retry",
-              //                 style: TextStyle(color: Colors.red, fontSize: 10))
-              //             : const SizedBox(),
-              //         _showErrorIcon
-              //             ? const Icon(Icons.error, color: Colors.red, size: 20)
-              //             : const SizedBox(),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-
               Container(
                 color: Colors.white,
                 padding: const EdgeInsets.only(
